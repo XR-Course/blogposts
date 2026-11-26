@@ -1,8 +1,6 @@
 # DevBlog #1 – Getting Started with AR Campus Navigation
 
-**Project:** AR Campus Navigation Assistant  
-**Author:** Alperen (344133)
-**Date:** 29 October 2026
+**Project:** AR Campus Navigation Assistant
 
 ## Introduction
 
@@ -24,6 +22,8 @@ I created a reference image library and used a physical product box as my first 
 
 I also created a simple cube prefab to visualize when an image was recognized. This helped me verify that the tracking system worked before implementing the actual localization logic.
 
+![Entrance marker detected with a virtual cube and localization status](entrance-marker-detection.png)
+
 ## Implementing Coordinate Alignment
 
 The next step was connecting recognized images to known positions in our campus coordinate system.
@@ -36,19 +36,25 @@ To visualize the result, I implemented a coordinate grid that appears in the AR 
 
 I also added a debug display showing the user's current X, Y, and Z coordinates. This allowed me to test whether the coordinates changed correctly when moving around.
 
-During testing, I measured approximately one meter of movement and compared it with the reported coordinates. The result was around 1.05 meters, which was reasonably accurate for our initial prototype.
+During an initial test, I measured approximately one meter of movement and compared it with the reported coordinates. The result was around 1.05 meters. This was an encouraging early result, although it was not enough to establish accuracy under different conditions.
+
+![Coordinate grid over the entrance marker, with the hallway marker visible ahead](coordinate-grid-markers.png)
 
 ## Challenges and Testing
 
 One of the biggest challenges was understanding how AR tracking behaves when physical objects move.
 
-During testing, I noticed that moving the physical marker did not automatically move the coordinate grid. At first, I thought this was an error, but I learned that the marker is used to establish a fixed coordinate system rather than continuously controlling the grid.
+During testing, I noticed that moving the physical marker after alignment did not automatically move the coordinate grid. At first, I thought this was an error, but I learned that the marker is used to establish a fixed coordinate system rather than continuously controlling the grid. This assumes the physical marker stays at its known position; if it is moved, a new alignment based on the correct marker position is needed.
 
 This is important for our application because navigation arrows should remain in the same physical locations even when the marker is no longer visible.
 
 Another challenge was occasional tracking loss, especially when moving the phone or pointing it at areas without enough recognizable visual details.
 
+![Relocalization warning displayed above the entrance and hallway markers](relocalization-warning.png)
+
 I also added a second marker called `HallwayCheckpoint`. Both markers can now be recognized by the application, but the recalibration functionality is not fully working yet.
+
+![Hallway checkpoint detected with a virtual object and coordinate display](hallway-marker-detection.png)
 
 The application successfully establishes its initial position using `EntranceMarker`, while the next task is making sure it can update its alignment when the checkpoint is detected.
 
