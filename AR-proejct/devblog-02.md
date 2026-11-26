@@ -55,7 +55,7 @@ A demo scene runs the whole flow in the Unity editor. A simulated user walks the
 
 When the app was built for the phone with photos of real door signs as markers, it reported that the marker library contained no ARCore data. ARCore recognises images by detecting **feature points**: distinctive corners and textures that can be matched from different angles and distances. Google's `arcoreimg` tool rates images from 0 to 100 and recommends at least 75. The signs scored 0, because they are mostly one flat colour with a little text, and the two signs looked almost the same. The image database could not be built at all.
 
-New markers were generated with many non-repeating shapes and strong contrast. Both score 100. They must be printed at exactly 18 cm, the size stored in the reference library, because ARCore uses the physical size to estimate the marker's distance.
+New markers were generated with many non-repeating shapes and strong contrast. Both score 100 and are printed at 18 cm, the size stored in the reference library, because ARCore uses the physical size to estimate distance. The updated screenshots in DevBlog #1 show these printed markers being detected on the phone.
 
 ![Door sign versus generated marker](marker-score-comparison.png)
 
